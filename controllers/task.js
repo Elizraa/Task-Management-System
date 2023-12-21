@@ -1,5 +1,5 @@
 const { Task, Status, status_index, } = require('../models/task');
-const { create_task_schema, update_task_schema } = require('../schema/task')
+const { create_task_schema, update_task_schema } = require('../schemas/task')
 
 const get_all_tasks = async (req, res) => {
   try {
@@ -31,7 +31,7 @@ const create_task = async (req, res) => {
     const new_task = await task.save();
     res.status(201).json({inserted_task_id:new_task.dataValues.id});
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -45,7 +45,7 @@ const remove_task = async (req, res) => {
     }
     res.status(200).json({ message: 'Task deleted successfully' });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -69,7 +69,7 @@ const update_task = async (req, res) => {
     await task.save();
     res.status(200).json({ message: 'Task updated successfully' });
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 

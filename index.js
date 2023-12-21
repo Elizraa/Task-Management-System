@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const path = require('path');
 
 //load env value and package
 require('dotenv').config()
@@ -15,10 +16,6 @@ db.connect();
 const cors = require('cors')
 app.use(cors())
 
-app.get("/", (request, response) => {
-    response.send("Hi there");
-});
-
 // Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,6 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 const task_route = require('./routes/task');
 app.use('/api/task', task_route);
 
+const swaggerUi = require('swagger-ui-express');
+const openapiSpec = require('./open_api');
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(openapiSpec));
 
 // Start the server
 app.listen(port, () => {
