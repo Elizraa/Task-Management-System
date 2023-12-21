@@ -24,8 +24,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
-const sampleRoute = require('./routes/sampleRoute');
-app.use('/api/sample', sampleRoute);
+const task_route = require('./routes/task');
+app.use('/api/task', task_route);
 
 
 // Start the server
