@@ -1,0 +1,3 @@
+@echo off
+echo Resetting the project...
+npm start
